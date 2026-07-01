@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>星河智善 · 新员工入职培训</title>
+<script src="https://cdn.tailwindcss.com">
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans SC',sans-serif; background:#0c0c1e; color:#fff; min-height:100vh; }
+.stars-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.star { position:absolute; background:#fff; border-radius:50%; animation:twinkle var(--d) ease-in-out infinite; }
+@keyframes twinkle { 0%,100% { opacity:0.2; } 50% { opacity:0.8; } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.card-anim { animation:fadeUp 0.5s ease-out both; }
+.card-anim:nth-child(1) { animation-delay:0.1s; }
+.card-anim:nth-child(2) { animation-delay:0.2s; }
+.card-anim:nth-child(3) { animation-delay:0.3s; }
+.card-anim:nth-child(4) { animation-delay:0.4s; }
+.card-anim:nth-child(5) { animation-delay:0.5s; }
+</style>
+</head>
+<body>
+<div class="stars-bg" id="stars"></div>
+<div class="relative z-10 max-w-lg mx-auto px-4 pb-16">
+  
+  <!-- Top Badge -->
+  <div class="text-center pt-8 pb-2">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] tracking-widest mb-4">
+      星河智善生活集团 · 人力行政中心
+    </div>
+    <h1 class="text-2xl font-black bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
+      2026年第二期
+    </h1>
+    <h2 class="text-xl font-bold text-white mt-1">新员工入职培训</h2>
+    <p class="text-xs text-white/30 mt-2">凝星河之力 · 启智善新程</p>
+  </div>
+
+  <!-- Meeting Info -->
+  <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-center card-anim">
+    <div class="text-[10px] text-white/40 tracking-wider mb-1">培训方式</div>
+    <div class="flex items-center justify-center gap-2">
+      <span class="text-lg">💻</span>
+      <span class="text-sm font-medium text-white/70">腾讯会议</span>
+    </div>
+    <div class="mt-2 text-3xl font-black text-amber-400 tracking-[0.2em]">576-553-473</div>
+    <p class="text-[10px] text-white/20 mt-1">请提前安装腾讯会议客户端</p>
+  </div>
+
+  <!-- Schedule -->
+  <div class="mt-6">
+    <h3 class="text-sm font-bold text-amber-400 mb-3 flex items-center gap-2">
+      <span>📋</span> 培训议程
+    </h3>
+    
+    <div class="space-y-3">
+      <!-- Session 1 -->
+      <div class="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06] card-anim">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">第1课</span>
+          <span class="text-xs text-white/40 font-mono">14:10 - 15:00</span>
+        </div>
+        <h4 class="text-sm font-bold text-white">公司发展历程及企业文化</h4>
+        <div class="flex items-center gap-1.5 mt-2 text-xs text-white/40">
+          <span>👤</span><span>讲师：邓永湖</span>
+        </div>
+      </div>
+
+      <!-- Session 2 -->
+      <div class="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06] card-anim">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">第2课</span>
+          <span class="text-xs text-white/40 font-mono">15:10 - 15:50</span>
+        </div>
+        <h4 class="text-sm font-bold text-white">安全信息与办公提效</h4>
+        <div class="flex items-center gap-1.5 mt-2 text-xs text-white/40">
+          <span>👤</span><span>讲师：史东</span>
+        </div>
+      </div>
+
+      <!-- Session 3 -->
+      <div class="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06] card-anim">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">第3课</span>
+          <span class="text-xs text-white/40 font-mono">15:50 - 16:30</span>
+        </div>
+        <h4 class="text-sm font-bold text-white">品牌宣传、社区文化、舆情处置实操培训</h4>
+        <div class="flex items-center gap-1.5 mt-2 text-xs text-white/40">
+          <span>👤</span><span>讲师：张花亮</span>
+        </div>
+      </div>
+
+      <!-- Session 4 -->
+      <div class="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06] card-anim">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">第4课</span>
+          <span class="text-xs text-white/40 font-mono">16:40 - 17:30</span>
+        </div>
+        <h4 class="text-sm font-bold text-white">廉洁从业及红黄线标准</h4>
+        <div class="flex items-center gap-1.5 mt-2 text-xs text-white/40">
+          <span>👤</span><span>讲师：谢坤（控股）</span>
+        </div>
+      </div>
+
+      <!-- Exam Session -->
+      <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 card-anim">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">📝 考试</span>
+          <span class="text-xs text-white/40 font-mono">17:30 - 18:00</span>
+        </div>
+        <h4 class="text-sm font-bold text-amber-400">训后统一闭卷考试</h4>
+        <div class="flex items-center gap-1.5 mt-2 text-xs text-white/40">
+          <span>📱</span><span>通过闯关系统完成 · 80分及格</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats / Flow -->
+  <div class="mt-6 grid grid-cols-5 gap-1.5 card-anim">
+    <div class="text-center p-2 rounded-lg bg-white/[0.03]"><div class="text-xs">📋</div><div class="text-[9px] text-white/30 mt-0.5">签到</div></div>
+    <div class="text-center p-2 rounded-lg bg-white/[0.03]"><div class="text-xs">📚</div><div class="text-[9px] text-white/30 mt-0.5">听课</div></div>
+    <div class="text-center p-2 rounded-lg bg-white/[0.03]"><div class="text-xs">💡</div><div class="text-[9px] text-white/30 mt-0.5">评估</div></div>
+    <div class="text-center p-2 rounded-lg bg-white/[0.03]"><div class="text-xs">⚔️</div><div class="text-[9px] text-white/30 mt-0.5">考试</div></div>
+    <div class="text-center p-2 rounded-lg bg-white/[0.03]"><div class="text-xs">🏆</div><div class="text-[9px] text-white/30 mt-0.5">证书</div></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="mt-6 text-center">
+    <a href="https://meeting.tencent.com/dm/576553473" target="_blank" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-black hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg shadow-amber-500/20">
+      💻 加入腾讯会议
+    </a>
+    <p class="text-[10px] text-white/20 mt-2">培训闯关系统入口将在签到后开启</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-8 text-center text-[9px] text-white/10 leading-loose">
+    <p>星河智善生活集团 · 人力行政中心</p>
+    <p>2026年6月 · 新星启航计划</p>
+  </div>
+</div>
+
+<script>
+// Stars background
+const s = document.getElementById('stars');
+for(let i=0;i<60;i++) {
+  const d=document.createElement('div');d.className='star';
+  d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';
+  const sz=Math.random()*2+0.5;d.style.width=sz+'px';d.style.height=sz+'px';
+  d.style.setProperty('--d',(Math.random()*3+2)+'s');
+  d.style.animationDelay=Math.random()*5+'s';
+  s.appendChild(d);
+}
+</script>
+</body>
+</html>

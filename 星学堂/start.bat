@@ -1,0 +1,9 @@
+@echo off
+cd /d D:\HuaweiMoveData\Users\Anna\Documents\星云学\星学堂
+echo 正在创建数据库迁移...
+..\.venv\Scripts\python.exe manage.py makemigrations learning
+echo 正在应用迁移...
+..\.venv\Scripts\python.exe manage.py migrate
+echo 正在启动星学堂服务器...
+..\.venv\Scripts\python.exe manage.py runserver 0.0.0.0:8000
+pause

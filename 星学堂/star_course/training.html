@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新员工培训 · 星学堂</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1040 40%, #0d1b3e 100%);
+      min-height: 100vh; color: #e0e0e0; padding: 20px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .header {
+      text-align: center; padding: 40px 20px 20px; max-width: 600px;
+    }
+    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header p { color: #aab; font-size: 14px; }
+    .cards { max-width: 600px; width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 20px 0; }
+    .card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s;
+    }
+    .card:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .card .title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .card .desc { font-size: 13px; color: #889; }
+    .card .badge {
+      display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px;
+      background: rgba(240,180,41,0.2); color: #f0b429; margin-top: 8px;
+    }
+    .footer { text-align: center; padding: 40px 0; font-size: 11px; color: #556; }
+    .back { color: #889; text-decoration: none; font-size: 13px; margin-bottom: 20px; display: inline-block; }
+    .back:hover { color: #f0b429; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div style="font-size:40px;margin-bottom:12px">📚</div>
+    <h1>新员工培训</h1>
+    <p>欢迎加入星河智善！请按顺序完成以下培训模块。</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="title">🏢 公司文化与价值观</div>
+      <div class="desc">了解星河智善的发展历程、使命愿景和核心价值观</div>
+      <span class="badge">📖 阅读 + 答题</span>
+    </div>
+    <div class="card">
+      <div class="title">📋 规章制度入门</div>
+      <div class="desc">公司考勤、薪酬、保密等基本制度学习</div>
+      <span class="badge">📖 阅读 + 答题</span>
+    </div>
+    <div class="card">
+      <div class="title">🛠️ 岗位技能基础</div>
+      <div class="desc">各岗位必备的工具、流程和规范入门</div>
+      <span class="badge">📖 阅读 + 答题</span>
+    </div>
+    <div class="card">
+      <div class="title">🔐 信息安全与合规</div>
+      <div class="desc">信息安全意识、数据保护及合规要求</div>
+      <span class="badge">📖 阅读 + 答题</span>
+    </div>
+    <div class="card">
+      <div class="title">🤝 团队协作入门</div>
+      <div class="desc">跨部门沟通、协作工具使用、团队融入</div>
+      <span class="badge">📖 阅读 + 答题</span>
+    </div>
+  </div>
+  <a href="/checkin/" class="back">← 返回闯关首页</a>
+  <div class="footer">🏔️ 星河智善 · 星途行动</div>
+</body>
+</html>

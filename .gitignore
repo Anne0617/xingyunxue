@@ -1,0 +1,11 @@
+﻿.venv/
+.agents/
+__pycache__/
+*.pyc
+node_modules/
+.vscode/
+十五五打卡/
+.cloudflare/
+.codex/
+.env
+*.sqlite3

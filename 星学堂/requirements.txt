@@ -1,0 +1,10 @@
+gunicorn>=20.0
+dj-database-url>=2.0
+psycopg2-binary>=2.9
+django>=5.0
+djangorestframework>=3.14
+django-cors-headers>=4.0
+django-simpleui>=2024
+qrcode>=7.4
+Pillow>=10.0
+whitenoise>=6.0

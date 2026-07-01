@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>星河智善 · 十五五星途行动</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <script>window.STAR_API_URL = '/api/checkin';</script>
+
+  <script>window.STAR_API_URL = '/api/checkin';window.USE_API_MODE = true;</script></head>
+<body>
+  <div class="adventure-bg"><div class="mountains"></div></div>
+  <div class="compass">🧭</div>
+
+  <!-- ===== 登录弹窗 ===== -->
+  <div class="modal-overlay" id="name-modal">
+    <div class="modal">
+      <h3>🏔️ 欢迎加入星河智善学习行动</h3>
+      <p>星河智善 · 十五五星途行动<br>请填写信息开启你的学习之旅</p>
+      <input type="text" class="modal-input" id="input-name" placeholder="请输入姓名" maxlength="10" autocomplete="name">
+      <input type="text" class="modal-input" id="input-dept" placeholder="请输入部门名称（如：品质管理部）" maxlength="20" autocomplete="organization">
+      <input type="text" class="modal-input" id="input-phone" placeholder="请输入联系方式（手机号/微信号）" maxlength="20" autocomplete="tel">
+      <button class="btn btn-gold modal-btn" onclick="saveProfile()">⚔️ 开始学习</button>
+    </div>
+  </div>
+
+  <!-- ===== 任务简报弹窗 ===== -->
+  <div class="briefing-overlay" id="briefing-overlay">
+    <div class="briefing-modal">
+      <div class="briefing-icon" id="b-icon">🔥</div>
+      <div class="briefing-code" id="b-code">M-01</div>
+      <div class="briefing-title" id="b-title">「<span class="highlight">星火燎原</span>」</div>
+      <div class="briefing-desc" id="b-desc">阅读5条简报，通过5道挑战之门</div>
+      <button class="btn btn-gold briefing-btn" id="b-btn">⚔️ 开始任务</button>
+    </div>
+  </div>
+
+  <!-- ===== 结果弹窗 ===== -->
+  <div class="result-overlay" id="result-overlay">
+    <div class="result-modal">
+      <div class="result-icon" id="result-icon">🎉</div>
+      <div class="result-title" id="result-title">任务通关！</div>
+      <div class="result-stars" id="result-stars">⭐⭐⭐</div>
+      <div class="result-score-wrap">
+        <span class="result-score-big" id="result-score-big">5/5</span>
+        <span class="result-score-label">挑战通过</span>
+      </div>
+      <div class="result-hp-remaining" id="result-hp">❤️❤️❤️❤️❤️</div>
+      <div class="result-detail" id="result-detail">精英！完美通关！</div>
+      <div class="result-actions">
+        <button class="btn btn-gold" id="result-btn">🗺️ 返回闯关版图</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 后台管理弹窗（管理员） ===== -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal" style="text-align:left;max-width:420px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="text-align:left;margin:0">📊 管理后台</h3>
+        <span style="font-size:10px;color:var(--text-muted)">星河智善 · 数据看板</span>
+      </div>
+      <div id="admin-summary" style="display:flex;gap:6px;margin-bottom:12px">
+        <div style="flex:1;background:var(--card-bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:900;color:var(--gold)" id="admin-users">0</div>
+          <div style="font-size:9px;color:var(--text-dim)">参与人数</div>
+        </div>
+        <div style="flex:1;background:var(--card-bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:900;color:var(--success)" id="admin-total-done">0</div>
+          <div style="font-size:9px;color:var(--text-dim)">总完成任务</div>
+        </div>
+        <div style="flex:1;background:var(--card-bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:900;color:var(--cyan)" id="admin-avg">0%</div>
+          <div style="font-size:9px;color:var(--text-dim)">完成率</div>
+        </div>
+      </div>
+
+
+
+      <!-- 成员列表 -->
+      <div id="admin-list" style="max-height:200px;overflow-y:auto;font-size:11px">
+        <div style="text-align:center;color:var(--text-muted);padding:12px">暂无数据，请先导入成员上报的进度</div>
+      </div>
+
+      <button class="btn btn-ghost modal-btn" style="margin-top:8px" onclick="closeModal('admin-modal')">关闭</button>
+    </div>
+  </div>
+
+  <!-- ===== 主容器 ===== -->
+  <div class="container">
+    <!-- 顶栏 -->
+    <header class="header">
+      <div class="logo-area" id="logo-area" onclick="onLogoTap()">
+        <div class="logo-icon">🗺️</div>
+        <div>
+          <div class="logo-text" id="logo-text">星途行动</div>
+          <div class="logo-sub">星河智善 · 十五五星途行动</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="hp-bar"><span class="hp-icon">❤️</span><span>x5</span></div>
+        <div class="user-badge" onclick="showNameModal()">
+          <div class="user-avatar" id="user-avatar-text">君</div>
+          <span id="user-name">学习者</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 管理入口（隐藏，双击Logo出现） -->
+    <div id="admin-entry" style="display:none;text-align:center;margin-bottom:8px">
+      <button class="btn btn-ghost" style="font-size:11px;padding:6px 16px" onclick="showAdminPanel()">🔐 管理后台</button>
+    </div>
+
+    <!-- ===== 首页 ===== -->
+    <div class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-badge">🏆 星河智善 · 星途行动</div>
+        <h1>凝星河之力<br><span class="highlight">赴智善之约</span></h1>
+        <p>三十天，三十项修炼<br>凝星河之力，赴智善之约</p>
+      </div>
+
+      <div class="game-stats">
+        <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-num" id="stat-done">0</div><div class="stat-label">通关任务</div></div>
+        <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num" id="stat-streak">0</div><div class="stat-label">累计积分</div></div>
+        <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-num" id="stat-score">0</div><div class="stat-label">能量值</div></div>
+      </div>
+
+      <div class="energy-section">
+        <div class="energy-header"><span>⚡ 奋进能量</span><span id="energy-text">0/30 任务</span></div>
+        <div class="energy-bar"><div class="energy-fill" id="energy-fill" style="width:0%"></div></div>
+        <div style="text-align:right;margin-top:3px;font-size:10px;color:var(--text-muted)" id="energy-pct">0%</div>
+      </div>
+
+      <div class="adventure-map">
+        <div class="section-title">🗺️ 闯关版图</div>
+        <div class="section-subtitle">完成每个任务解锁下一关 · 30天征服十五五</div>
+        <div class="map-scroll"><div class="map-path-container" id="map-container"></div></div>
+      </div>
+    </div>
+
+    <!-- ===== 任务详情 ===== -->
+    <div class="page" id="page-detail">
+      <div class="detail-header">
+        <button class="back-btn" id="back-btn">‹</button>
+        <div>
+          <div class="detail-title" id="detail-title">🔥 星火燎原</div>
+          <div class="detail-code" id="detail-code">M-01 · DAY 1</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="knowledge" onclick="switchTab('knowledge')">📋 任务简报</button>
+        <button class="tab" data-tab="quiz" onclick="switchTab('quiz')">⚔️ 挑战之门</button>
+      </div>
+
+      <div class="tab-content active" id="tab-knowledge">
+        <div class="briefing-list" id="briefing-list"></div>
+      </div>
+
+      <div class="tab-content" id="tab-quiz">
+        <div class="challenge-container" id="challenge-content"></div>
+        <div class="submit-section">
+          <button class="btn btn-gold" id="submit-btn" onclick="submitChallenge()">⚔️ 提交挑战</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 荣誉榜 ===== -->
+    <div class="page" id="page-leaderboard">
+      <!-- 上报入口 -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0 4px">
+        <div>
+          <div class="section-title" style="font-size:17px">🏆 智善精英榜</div>
+          <div class="section-subtitle" style="font-size:10px;margin-bottom:0">星河流转 · 智善争先</div>
+        </div>
+
+      </div>
+      <div style="font-size:9px;color:var(--text-muted);margin-bottom:10px">排名基于完成任务数量和积分 · 每日更新</div>
+      <div id="rank-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== 底部导航 ===== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home"><div class="nav-icon">🗺️</div><div class="nav-label">闯关版图</div></button>
+    <button class="nav-item" data-page="admin"><div class="nav-icon">📊</div><div class="nav-label">管理</div></button>
+  <button class="nav-item" data-page="leaderboard"><div class="nav-icon">🏆</div><div class="nav-label">智善精英榜</div></button>
+  </nav>
+
+  <script src="/static/js/api.js?v=2"></script>
+  <script src="/static/js/content.js?v=2"></script>
+  <script src="/static/js/missions.js?v=2"></script>
+  <script src="/static/js/app.js?v=2"></script>
+
+<script>
+// === API 数据同步：闯关结果自动提交到星学堂 ===
+window.USE_API_MODE = true;
+if (window.USE_API_MODE) {
+  const __origSubmit = submitChallenge;
+  submitChallenge = function() {
+    // 先执行原来的提交逻辑
+    __origSubmit();
+    
+    // 再异步提交到 API
+    if (APP.correctCount < 4) return; // 未通关不提交
+    const u = DB.getUser();
+    if (!u.name) return;
+    
+    const d = DAYS_DATA[APP.currentDay - 1];
+    if (!d || !APP.answered) return;
+    
+    const answered = {};
+    d.questions.forEach((q, i) => {
+      if (APP.answers[i] !== undefined) answered[i] = APP.answers[i];
+    });
+    
+    fetch(API_BASE + '/submit/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json',
+        'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)?.[1] || ''
+      },
+      body: JSON.stringify({
+        name: APP.userName,
+        department: APP.userDept || '',
+        day: APP.currentDay,
+        score: APP.correctCount,
+        hpLeft: APP.hp,
+        answers: answered
+      })
+    }).then(r => r.json()).then(d => {
+      if (d.success) console.log('✅ 闯关结果已提交到星学堂');
+    }).catch(e => console.warn('提交到星学堂失败(可忽略):', e));
+  };
+  
+  // 同步排行榜
+  const __origRender = renderLeaderboard;
+  renderLeaderboard = function() {
+    try {
+      fetch(API_BASE + '/leaderboard/')
+        .then(r => r.json())
+        .then(data => {
+          // 显示API排行榜
+          const c = document.getElementById('rank-list');
+          var items = data.individual || data; if (items && items.length) {
+            c.innerHTML = items.slice(0, 10).map(u => 
+              '<div class="rank-card"><div class="rank-num">' + 
+              (u.rank === 1 ? '👑' : u.rank === 2 ? '🥈' : u.rank === 3 ? '🥉' : '#' + u.rank) +
+              '</div><div class="rank-avatar">' + u.name.charAt(0) +
+              '</div><div class="rank-info"><div class="rank-name">' + u.name +
+              '</div><div class="rank-stat">' + (u.department || '') + ' · 通关 ' + u.daysDone + ' 任务 · ' + u.totalScore + ' 积分' +
+              '</div></div><div class="rank-score">' + u.totalScore + '</div></div>'
+            ).join('');
+            return;
+          }
+        });
+    } catch(e) {}
+    __origRender();
+  };
+}
+</script>
+<!-- Admin Login -->
+<div class="modal-overlay" id="admin-login-modal">
+  <div class="modal" style="text-align:left;max-width:380px">
+    <h3 style="text-align:center;margin-bottom:12px">🔐 管理员登录</h3>
+    <p style="text-align:center;color:#aab;font-size:12px;margin-bottom:16px">请输入密码查看数据</p>
+    <input type="password" id="admin-pwd-input" placeholder="管理员密码" style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:#fff;font-size:15px;box-sizing:border-box;margin-bottom:8px">
+    <div id="admin-pwd-error" style="color:#e74c3c;font-size:12px;margin-bottom:8px;display:none">密码错误</div>
+    <button class="btn btn-gold modal-btn" style="width:100%" onclick="verifyAdminPassword()">验证登录</button>
+    <button class="btn btn-ghost modal-btn" style="width:100%;margin-top:6px" onclick="closeModal('admin-login-modal')">取消</button>
+  </div>
+</div>
+<!-- Admin Dashboard -->
+<div class="modal-overlay" id="admin-data-modal">
+  <div class="modal" style="text-align:left;max-width:520px;padding:24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h3 style="margin:0">📊 闯关数据管理</h3>
+      <span style="font-size:10px;color:#666">星河智善 · 星途行动</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:20px;font-weight:900;color:#f0b429" id="admin-panel-users">0</div>
+        <div style="font-size:10px;color:#889">参与人数</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:20px;font-weight:900;color:#2ecc71" id="admin-panel-total">0</div>
+        <div style="font-size:10px;color:#889">总通关任务</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:20px;font-weight:900;color:#00bcd4" id="admin-panel-avg">0</div>
+        <div style="font-size:10px;color:#889">平均积分</div>
+      </div>
+    </div>
+    <div style="max-height:260px;overflow-y:auto;margin-bottom:12px;font-size:12px">
+      <table style="width:100%;border-collapse:collapse" id="admin-data-table">
+        <thead><tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+          <th style="padding:6px 4px;text-align:left;color:#f0b429">排名</th>
+          <th style="padding:6px 4px;text-align:left;color:#f0b429">姓名</th><th style="padding:6px 4px;text-align:center;color:#f0b429">部门</th>
+          <th style="padding:6px 4px;text-align:center;color:#f0b429">通关数</th>
+          <th style="padding:6px 4px;text-align:center;color:#f0b429">积分</th>
+        </tr></thead>
+        <tbody id="admin-data-tbody"></tbody>
+      </table>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-gold modal-btn" style="flex:1" onclick="exportAdminCSV()">📥 导出CSV</button>
+      <button class="btn btn-ghost modal-btn" style="flex:1" onclick="closeModal('admin-data-modal')">关闭</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
